@@ -1,3 +1,35 @@
 GET {{url}}/test
 Content-Type: application/json
 #Authorization: Bearer {{token}}
+
+###
+GET {{url}}/persons
+Authorization: Bearer {{token}}
+
+###
+GET {{url}}/persons/1
+Authorization: Bearer {{token}}
+
+###
+POST {{url}}/persons
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "John Doe",
+    "age": 30
+}
+
+###
+PUT {{url}}/persons/1
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Test Test",
+    "age": 100
+}
+
+###
+DELETE {{url}}/persons/1
+Authorization: Bearer {{token}}

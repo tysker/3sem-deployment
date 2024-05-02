@@ -1,9 +1,7 @@
-package dk.lyngby.dao;
+package dk.lyngby.dao.impl;
 
+import dk.lyngby.dao.CrudDao;
 import dk.lyngby.model.Person;
-import jakarta.persistence.EntityManagerFactory;
-
-import java.util.List;
 
 public class TestDao extends CrudDao<Person, Integer> {
 

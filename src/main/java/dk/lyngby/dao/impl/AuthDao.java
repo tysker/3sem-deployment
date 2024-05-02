@@ -1,4 +1,4 @@
-package dk.lyngby.dao;
+package dk.lyngby.dao.impl;
 
 import dk.lyngby.exception.ApiException;
 import dk.lyngby.exception.AuthorizationException;

@@ -1,10 +1,13 @@
-package dk.lyngby.dao;
+package dk.lyngby.dao.impl;
 
+import dk.lyngby.dao.Dao;
 import dk.lyngby.model.Person;
 import jakarta.persistence.EntityManagerFactory;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
 public class PersonDao implements Dao<Person, Integer> {
 
     private static PersonDao instance;
@@ -34,16 +37,19 @@ public class PersonDao implements Dao<Person, Integer> {
     }
 
     @Override
-    public void create(Person p) {
+    public Person create(Person p) {
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(p);
             em.getTransaction().commit();
+            return p;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Person already exists");
         }
     }
 
     @Override
-    public Person update(Person p, Integer id) {
+    public Person update(Integer id, Person p) {
         Person merge;
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
@@ -63,6 +69,14 @@ public class PersonDao implements Dao<Person, Integer> {
             Person person = em.find(Person.class, id);
             em.remove(person);
             em.getTransaction().commit();
+        }
+    }
+
+    @Override
+    public boolean validatePrimaryKey(Integer integer) {
+        try (var em = emf.createEntityManager()) {
+            var person = em.find(Person.class, integer);
+            return person != null;
         }
     }
 }

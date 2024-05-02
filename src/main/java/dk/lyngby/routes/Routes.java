@@ -22,6 +22,7 @@ public class Routes {
     private int count = 0;
 
     private final AuthRoute authRoutes = new AuthRoute();
+    private final PersonRoutes personRoutes = new PersonRoutes();
 
     private final Logger LOGGER = LoggerFactory.getLogger(Routes.class);
 
@@ -36,6 +37,7 @@ public class Routes {
             app.before(this::requestInfoHandler);
             app.routes(() -> {
                 path("/", authRoutes.getRoutes());
+                path("/", personRoutes.getRoutes());
                 path("/test", () -> {
                     get("/", ctx -> ctx.json("{\"msg\":\"Hello from test\"}"), Role.RoleName.ANYONE);
                 });

@@ -44,7 +44,4 @@ public class Person {
         return Objects.hash(id, name, age);
     }
 
-    public enum TestEnum {
-        TEST1, TEST2, TEST3
-    }
 }

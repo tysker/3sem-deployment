@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import dk.lyngby.TokenFactory;
 import dk.lyngby.config.ApplicationConfig;
 import dk.lyngby.config.HibernateConfig;
-import dk.lyngby.dao.AuthDao;
+import dk.lyngby.dao.impl.AuthDao;
 import dk.lyngby.dto.LoginDto;
 import dk.lyngby.dto.RegisterDto;
 import dk.lyngby.exception.ApiException;

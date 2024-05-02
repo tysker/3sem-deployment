@@ -5,7 +5,7 @@ import com.google.gson.GsonBuilder;
 import dk.lyngby.TokenFactory;
 import dk.lyngby.config.ApplicationConfig;
 import dk.lyngby.config.HibernateConfig;
-import dk.lyngby.dao.AuthDao;
+import dk.lyngby.dao.impl.AuthDao;
 import dk.lyngby.dto.TokenDto;
 import dk.lyngby.exception.ApiException;
 import dk.lyngby.exception.AuthorizationException;

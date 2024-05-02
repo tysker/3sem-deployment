@@ -1,6 +1,7 @@
 package dk.lyngby.dao;
 
 import dk.lyngby.config.HibernateConfig;
+import dk.lyngby.dao.impl.PersonDao;
 import dk.lyngby.model.Person;
 import jakarta.persistence.EntityManagerFactory;
 import org.junit.jupiter.api.*;
@@ -76,7 +77,7 @@ class PersonDaoTest {
         Person expected = new Person("Person 100", 100);
         expected.setId(p2.getId());
         // when
-        Person actual = personDao.update(expected, p2.getId());
+        Person actual = personDao.update(p2.getId(), expected);
         // then
         Assertions.assertEquals(expected, actual);
     }
