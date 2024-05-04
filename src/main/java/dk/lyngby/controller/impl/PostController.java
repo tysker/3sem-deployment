@@ -2,57 +2,57 @@ package dk.lyngby.controller.impl;
 
 import dk.lyngby.config.HibernateConfig;
 import dk.lyngby.controller.IController;
-import dk.lyngby.dao.impl.PersonDao;
-import dk.lyngby.dto.PersonDto;
-import dk.lyngby.model.Person;
+import dk.lyngby.dao.impl.PostDao;
+import dk.lyngby.dto.PostDto;
+import dk.lyngby.model.Post;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
 
 import java.util.List;
 
-public class PersonController implements IController<Person, Integer> {
+public class PostController implements IController<Post, Integer> {
 
-    private final PersonDao dao;
+    private final PostDao dao;
 
-    public PersonController() {
+    public PostController() {
         EntityManagerFactory emf = HibernateConfig.getEntityManagerFactory(false);
-        this.dao = PersonDao.getInstance(emf);
+        this.dao = PostDao.getInstance(emf);
     }
     @Override
     public void read(Context ctx) {
         // request
         int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
         // entity
-        Person person = dao.get(id);
+        Post post = dao.get(id);
         // dto
-        PersonDto personDto = new PersonDto(person);
+        PostDto postDto = new PostDto(post);
         // response
         ctx.res().setStatus(200);
-        ctx.json(personDto, PersonDto.class);
+        ctx.json(postDto, PostDto.class);
     }
 
     @Override
     public void readAll(Context ctx) {
         // entity
-        List<Person> hotels = dao.getAll();
+        List<Post> posts = dao.getAll();
         // dto
-        List<PersonDto> personDtos = PersonDto.toPersonDtoList(hotels);
+        List<PostDto> postDtos = PostDto.toPostDtoList(posts);
         // response
         ctx.res().setStatus(200);
-        ctx.json(personDtos, PersonDto.class);
+        ctx.json(postDtos, PostDto.class);
     }
 
     @Override
     public void create(Context ctx) {
         // request
-        Person jsonRequest = validateEntity(ctx);
+        Post jsonRequest = validateEntity(ctx);
         // entity
-        Person person = dao.create(jsonRequest);
+        Post post = dao.create(jsonRequest);
         // dto
-        PersonDto hotelDto = new PersonDto(person);
+        PostDto postDto = new PostDto(post);
         // response
         ctx.res().setStatus(201);
-        ctx.json(hotelDto, PersonDto.class);
+        ctx.json(postDto, PostDto.class);
     }
 
     @Override
@@ -60,12 +60,12 @@ public class PersonController implements IController<Person, Integer> {
         // request
         int id = ctx.pathParamAsClass("id", Integer.class).check(this::validatePrimaryKey, "Not a valid id").get();
         // entity
-        Person update = dao.update(id, validateEntity(ctx));
+        Post update = dao.update(id, validateEntity(ctx));
         // dto
-        PersonDto hotelDto = new PersonDto(update);
+        PostDto postDto = new PostDto(update);
         // response
         ctx.res().setStatus(200);
-        ctx.json(hotelDto, Person.class);
+        ctx.json(postDto, Post.class);
     }
 
     @Override
@@ -84,10 +84,10 @@ public class PersonController implements IController<Person, Integer> {
     }
 
     @Override
-    public Person validateEntity(Context ctx) {
-        return ctx.bodyValidator(Person.class)
-                .check(person -> person.getName() != null && !person.getName().isEmpty(), "Name cannot be empty")
-                .check(person -> person.getAge() > 0, "Age must be greater than 0")
+    public Post validateEntity(Context ctx) {
+        return ctx.bodyValidator(Post.class)
+                .check(person -> person.getHeader() != null && !person.getHeader().isEmpty(), "Name cannot be empty")
+                .check(person -> person.getContent() != null && !person.getContent().isEmpty(), "Comment cannot be empty")
                 .get();
 
     }

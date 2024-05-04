@@ -13,35 +13,35 @@ import java.util.Objects;
 @NoArgsConstructor
 @ToString
 @Entity
-@Table(name = "person")
-public class Person {
+@Table(name = "post")
+public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
-    @Column(name = "name", nullable = false)
-    private String name;
+    @Column(name = "header", nullable = false)
+    private String header;
 
-    @Column(name = "age", nullable = false)
-    private Integer age;
+    @Column(name = "content", nullable = false)
+    private String content;
 
-    public Person(String name, Integer age) {
-        this.name = name;
-        this.age = age;
+    public Post(String header, String content) {
+        this.header = header;
+        this.content = content;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Person person = (Person) o;
-        return Objects.equals(id, person.id) && Objects.equals(name, person.name) && Objects.equals(age, person.age);
+        Post post = (Post) o;
+        return Objects.equals(id, post.id) && Objects.equals(content, post.content) && Objects.equals(header, post.header);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, age);
+        return Objects.hash(id, header, content);
     }
 
 }

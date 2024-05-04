@@ -1,43 +1,43 @@
 package dk.lyngby.dao.impl;
 
 import dk.lyngby.dao.Dao;
-import dk.lyngby.model.Person;
+import dk.lyngby.model.Post;
 import jakarta.persistence.EntityManagerFactory;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @NoArgsConstructor(access = lombok.AccessLevel.PRIVATE)
-public class PersonDao implements Dao<Person, Integer> {
+public class PostDao implements Dao<Post, Integer> {
 
-    private static PersonDao instance;
+    private static PostDao instance;
 
     private static EntityManagerFactory emf;
 
-    public static PersonDao getInstance(EntityManagerFactory _emf) {
+    public static PostDao getInstance(EntityManagerFactory _emf) {
         if (instance == null) {
             emf = _emf;
-            instance = new PersonDao();
+            instance = new PostDao();
         }
         return instance;
     }
 
     @Override
-    public List<Person> getAll() {
+    public List<Post> getAll() {
         try (var em = emf.createEntityManager()) {
-            return em.createQuery("SELECT p FROM Person p", Person.class).getResultList();
+            return em.createQuery("SELECT p FROM Post p", Post.class).getResultList();
         }
     }
 
     @Override
-    public Person get(Integer id) {
+    public Post get(Integer id) {
         try (var em = emf.createEntityManager()) {
-            return em.find(Person.class, id);
+            return em.find(Post.class, id);
         }
     }
 
     @Override
-    public Person create(Person p) {
+    public Post create(Post p) {
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
             em.persist(p);
@@ -49,14 +49,14 @@ public class PersonDao implements Dao<Person, Integer> {
     }
 
     @Override
-    public Person update(Integer id, Person p) {
-        Person merge;
+    public Post update(Integer id, Post p) {
+        Post merge;
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            Person person = em.find(Person.class, id);
-            person.setName(p.getName());
-            person.setAge(p.getAge());
-            merge = em.merge(person);
+            Post post = em.find(Post.class, id);
+            post.setHeader(p.getHeader());
+            post.setContent(p.getContent());
+            merge = em.merge(post);
             em.getTransaction().commit();
         } catch (Exception e) {
             throw new IllegalArgumentException("Person does not exist");
@@ -68,8 +68,8 @@ public class PersonDao implements Dao<Person, Integer> {
     public void delete(Integer id) {
         try (var em = emf.createEntityManager()) {
             em.getTransaction().begin();
-            Person person = em.find(Person.class, id);
-            em.remove(person);
+            Post post = em.find(Post.class, id);
+            em.remove(post);
             em.getTransaction().commit();
         }
     }
@@ -77,7 +77,7 @@ public class PersonDao implements Dao<Person, Integer> {
     @Override
     public boolean validatePrimaryKey(Integer integer) {
         try (var em = emf.createEntityManager()) {
-            var person = em.find(Person.class, integer);
+            var person = em.find(Post.class, integer);
             return person != null;
         }
     }

@@ -3,33 +3,33 @@ Content-Type: application/json
 #Authorization: Bearer {{token}}
 
 ###
-GET {{url}}/persons
+GET {{url}}/posts
 Authorization: Bearer {{token}}
 
 ###
-GET {{url}}/persons/1
+GET {{url}}/posts/1
 Authorization: Bearer {{token}}
 
 ###
-POST {{url}}/persons
+POST {{url}}/posts
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "John Doe",
-    "age": 30
+  "header": "Technology",
+  "content": "This is a technology blog"
 }
 
 ###
-PUT {{url}}/persons/1
+PUT {{url}}/posts/1
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-    "name": "Test Test",
-    "age": 100
+  "header": "Technology Test Update",
+  "content": "This is a technology blog"
 }
 
 ###
-DELETE {{url}}/persons/1
+DELETE {{url}}/posts/1
 Authorization: Bearer {{token}}

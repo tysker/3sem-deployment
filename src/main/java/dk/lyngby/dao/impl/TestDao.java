@@ -1,9 +1,9 @@
 package dk.lyngby.dao.impl;
 
 import dk.lyngby.dao.CrudDao;
-import dk.lyngby.model.Person;
+import dk.lyngby.model.Post;
 
-public class TestDao extends CrudDao<Person, Integer> {
+public class TestDao extends CrudDao<Post, Integer> {
 
     public static TestDao instance;
 
