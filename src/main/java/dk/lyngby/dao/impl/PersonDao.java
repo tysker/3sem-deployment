@@ -58,6 +58,8 @@ public class PersonDao implements Dao<Person, Integer> {
             person.setAge(p.getAge());
             merge = em.merge(person);
             em.getTransaction().commit();
+        } catch (Exception e) {
+            throw new IllegalArgumentException("Person does not exist");
         }
         return merge;
     }

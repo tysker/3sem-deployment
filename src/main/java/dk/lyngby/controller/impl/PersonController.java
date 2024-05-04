@@ -1,6 +1,7 @@
-package dk.lyngby.controller;
+package dk.lyngby.controller.impl;
 
 import dk.lyngby.config.HibernateConfig;
+import dk.lyngby.controller.IController;
 import dk.lyngby.dao.impl.PersonDao;
 import dk.lyngby.dto.PersonDto;
 import dk.lyngby.model.Person;
