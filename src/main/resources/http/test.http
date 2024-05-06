@@ -16,19 +16,23 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "header": "Technology",
-  "content": "This is a technology blog"
+  "header": "Technology Part 2",
+  "content": "This is a technology blog for part 2"
 }
 
 ###
-PUT {{url}}/posts/1
+PUT {{url}}/posts/5
 Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "header": "Technology Test Update",
-  "content": "This is a technology blog"
+  "header": "Technology Part 4",
+  "content": "This is a technology blog for part 4"
 }
+
+###
+DELETE {{url}}/posts/1
+Authorization: Bearer {{token}}
 
 ###
 DELETE {{url}}/posts/1
