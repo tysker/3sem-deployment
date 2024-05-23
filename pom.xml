@@ -31,6 +31,7 @@
 
         <sonar.organization>tysker</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.projectKey>3sem-deployment-backend</sonar.projectKey>
     </properties>
 
     <repositories>
